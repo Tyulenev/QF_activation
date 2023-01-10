@@ -4,11 +4,11 @@ package com.QSystems.quick_flow_registration.DAO;
 
 
 import com.QSystems.quick_flow_registration.entity.LicenceData;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository

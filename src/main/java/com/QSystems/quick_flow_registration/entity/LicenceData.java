@@ -1,7 +1,10 @@
 package com.QSystems.quick_flow_registration.entity;
 
-import jakarta.persistence.*;
+
 import lombok.Data;
+
+
+import javax.persistence.*;
 
 
 @Data

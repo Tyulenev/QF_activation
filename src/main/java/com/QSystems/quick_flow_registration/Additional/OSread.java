@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class OSread {
-    private static String getOSName() {
+    public static String getOSName() {
         return System.getProperty("os.name");
     }
 

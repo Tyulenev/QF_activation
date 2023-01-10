@@ -19,7 +19,8 @@ public interface LicenceDataService {
     public List<LicenceData> getLicenceTable();
     public void saveLicenceData(LicenceData ld);
 
-    public void testDeleteData();
+    public void deleteLicenceData();
+    public String checkLicenceData(String encryptedData);
 //    public void saveEmployee(LicenceData emp);
 //
 //    public LicenceData getEmployee(int id);

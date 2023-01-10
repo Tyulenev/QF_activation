@@ -39,7 +39,7 @@ public class MyRestController {
 
     @PostMapping("/add-licence-data")
     public LicenceData addLicenceData(@RequestBody LicenceData licData) {
-        licenceDataService.testDeleteData();
+        licenceDataService.deleteLicenceData();
         licData.setParamName("Enc_pswd");
         licenceDataService.saveLicenceData(licData);
         return licData;
@@ -47,9 +47,14 @@ public class MyRestController {
 
     //Dont Working!!!
     @GetMapping("/is-licences-ok")
-    public String isLicenceOk() {
+    public String isLicenceOk(@RequestBody String encryptedData) {
+        return licenceDataService.checkLicenceData(encryptedData);
+    }
 
-        return OSread.getMatherBoardNumber();
+//    Additions
+    @GetMapping("/get-os-info")
+    public String fetOSInfo() {
+        return OSread.getOSName();
     }
 
 
@@ -79,7 +84,7 @@ public class MyRestController {
 
     @DeleteMapping("/test-delete-all")
     public String testDelAll () {
-        licenceDataService.testDeleteData();
+        licenceDataService.deleteLicenceData();
         return "Delete OK!";
     }
 

@@ -22,7 +22,6 @@ public class MyRestController {
     @Autowired
     private LicenceDataService licenceDataService;
 
-//    @ResponseBody
     @RequestMapping(value = "/licence-info", method = RequestMethod.GET)
     public List<LicenceData> showLicenceInfo() throws Exception {
         List<LicenceData> licenceData = licenceDataService.getLicenceTable();
@@ -47,7 +46,6 @@ public class MyRestController {
         return licData;
     }
 
-    //Dont Working!!!
     @GetMapping("/is-licences-ok")
     public String isLicenceOk() {
         return licenceDataService.checkLicenceData();
@@ -66,13 +64,12 @@ public class MyRestController {
 
     @SneakyThrows
     @GetMapping("/test-decrypt")
-//    5SScQb1oBdlWyKCdTvbDPqwcj6cyfV0WGKioO4DHuWo=
     public String testDecrypt123 (@RequestBody String encryptedData) {
         Decoder dec1 = new Decoder();
         return dec1.decrypt(encryptedData);
     }
 
-    @DeleteMapping("/test-delete-all")
+    @DeleteMapping("/delete-all")
     public String testDelAll () {
         licenceDataService.deleteLicenceData();
         return "Delete OK!";

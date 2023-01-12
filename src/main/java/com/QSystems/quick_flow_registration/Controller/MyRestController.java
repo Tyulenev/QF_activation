@@ -2,11 +2,13 @@ package com.QSystems.quick_flow_registration.Controller;
 
 
 
+import com.QSystems.quick_flow_registration.Additional.Decoder;
 import com.QSystems.quick_flow_registration.Additional.FileWriter;
 import com.QSystems.quick_flow_registration.Additional.OSread;
 import com.QSystems.quick_flow_registration.Service.LicenceDataService;
 import com.QSystems.quick_flow_registration.entity.LicenceData;
 import com.QSystems.quick_flow_registration.exceptionHandling.NoSuchLicenceException;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,8 +49,8 @@ public class MyRestController {
 
     //Dont Working!!!
     @GetMapping("/is-licences-ok")
-    public String isLicenceOk(@RequestBody String encryptedData) {
-        return licenceDataService.checkLicenceData(encryptedData);
+    public String isLicenceOk() {
+        return licenceDataService.checkLicenceData();
     }
 
 //    Additions
@@ -57,29 +59,17 @@ public class MyRestController {
         return OSread.getOSName();
     }
 
-
-//    @GetMapping("/employees/{id}")
-//    public LicenceData getEmployee(@PathVariable int id) {
-//        LicenceData emp = employeeService.getEmployee(id);
-//
-//        return emp;
-//    }
-//
-//    @PostMapping("/add-employee")
-//    public LicenceData addNewEmployee(@RequestBody LicenceData emp) {
-//        employeeService.saveEmployee(emp);
-//        return emp;
-//    }
-//
-//    @DeleteMapping("/del-employee/{id}")
-//    public String deleteEmps (@PathVariable int id) {
-//        employeeService.deleteEmp(id);
-//        return "LicenceData with id = " + id + " was deleted";
-//    }
-
     @GetMapping("/test1")
     public String test1 () {
         return "test1 !!!!!";
+    }
+
+    @SneakyThrows
+    @GetMapping("/test-decrypt")
+//    5SScQb1oBdlWyKCdTvbDPqwcj6cyfV0WGKioO4DHuWo=
+    public String testDecrypt123 (@RequestBody String encryptedData) {
+        Decoder dec1 = new Decoder();
+        return dec1.decrypt(encryptedData);
     }
 
     @DeleteMapping("/test-delete-all")

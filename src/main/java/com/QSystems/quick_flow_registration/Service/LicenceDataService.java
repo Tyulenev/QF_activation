@@ -20,7 +20,7 @@ public interface LicenceDataService {
     public void saveLicenceData(LicenceData ld);
 
     public void deleteLicenceData();
-    public String checkLicenceData(String encryptedData);
+    public String checkLicenceData();
 //    public void saveEmployee(LicenceData emp);
 //
 //    public LicenceData getEmployee(int id);

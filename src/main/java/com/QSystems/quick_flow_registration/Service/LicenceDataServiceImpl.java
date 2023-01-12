@@ -2,6 +2,7 @@ package com.QSystems.quick_flow_registration.Service;
 
 
 
+import com.QSystems.quick_flow_registration.Additional.Decoder;
 import com.QSystems.quick_flow_registration.Additional.OSread;
 import com.QSystems.quick_flow_registration.DAO.LicenceDataDAO;
 import com.QSystems.quick_flow_registration.entity.LicenceData;
@@ -37,11 +38,21 @@ public class LicenceDataServiceImpl implements LicenceDataService {
     }
 
     @Override
-    public String checkLicenceData(String encryptedData) {
-        if (!OSread.getMatherBoardNumber().equals(encryptedData)) {
-            throw new NoSuchLicenceException("Licences data is incorrect. Please re-enter your licence key.");
+    public String checkLicenceData() {
+        Decoder dec1 = new Decoder();
+        String encryptedData = null;
+//        dec1.decrypt(encryptedData);
+        List<LicenceData> ld = licenceDataDAO.getLicenceTable();
+        if (ld.size()==1) {
+            encryptedData = ld.get(0).getValue();
         }
-        else return "Licence is OK";
+        try {
+            if (!OSread.getMatherBoardNumber().equals(dec1.decrypt(encryptedData))) {
+                throw new NoSuchLicenceException("Licences data is incorrect. Please re-enter your licence key.");
+            } else return "Licence is OK";
+        } catch (Exception e) {
+            throw new NoSuchLicenceException("Decryption failed");
+        }
     }
 
     //    @Override

@@ -17,14 +17,19 @@ public class FileWriter {
         Date date = new Date();
 //        String newFileName_old = date.getTime() + "_QFlicence.txt";
 //        String newFileName = "_QFLicence.txt";
-        Path newfilePath = Paths.get(mainPath + "\\" + newFileName);
-        if (!Files.exists(newfilePath))
-            Files.createFile(newfilePath);
+        Path newFilePath=null;
+        if (OSread.isWindows())
+            newFilePath = Paths.get(mainPath + "\\" + newFileName);
+        else if (OSread.isLinux())
+            newFilePath = Paths.get(mainPath + "/" + newFileName);
+        else newFilePath = Paths.get(newFileName);
+        if (!Files.exists(newFilePath))
+            Files.createFile(newFilePath);
         else {
-            Files.delete(newfilePath);
-            Files.createFile(newfilePath);
+            Files.delete(newFilePath);
+            Files.createFile(newFilePath);
         }
         byte[] outData = writeStr.getBytes();
-        Files.write(newfilePath, outData);
+        Files.write(newFilePath, outData);
     }
 }

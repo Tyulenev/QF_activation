@@ -9,12 +9,12 @@ public class OSread {
         return System.getProperty("os.name");
     }
 
-    private static boolean isWindows() {
+    public static boolean isWindows() {
         if (getOSName().startsWith("Windows")) return true;
         else return false;
     }
 
-    private static boolean isLinux() {
+    public static boolean isLinux() {
 //        if (getOSName().startsWith("Linux") || getOSName().startsWith("Unix")) return true;
 //        else return false;
         String OS = getOSName();

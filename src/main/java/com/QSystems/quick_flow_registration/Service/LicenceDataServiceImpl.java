@@ -47,6 +47,9 @@ public class LicenceDataServiceImpl implements LicenceDataService {
             encryptedData = ld.get(0).getValue();
         }
         try {
+            if (ld.size()!=1)
+                throw new NoSuchLicenceException("\n" +
+                        "Licensing table is broken (number of entries != 1). Perform activation again.");
             if (!OSread.getMatherBoardNumber().equals(dec1.decrypt(encryptedData))) {
                 throw new NoSuchLicenceException("Licences data is incorrect. Please re-enter your licence key.");
             } else return "Licence is OK";

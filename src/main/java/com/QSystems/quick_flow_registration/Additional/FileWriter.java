@@ -7,9 +7,9 @@ import java.nio.file.Paths;
 import java.util.Date;
 
 public class FileWriter {
-    public static void writeFile(String writeStr, String newFileName) throws IOException {
+    public static void writeFile(String writeStr,String fileDist, String newFileName) throws IOException {
 //        String strToWriteToFile = OSread.getMatherBoardNumber();
-        Path mainPath = Paths.get("results");
+        Path mainPath = Paths.get(fileDist);
         if (!Files.exists(mainPath))
         {
             Files.createDirectory(mainPath);
@@ -22,7 +22,7 @@ public class FileWriter {
             newFilePath = Paths.get(mainPath + "\\" + newFileName);
         else if (OSread.isLinux())
             newFilePath = Paths.get(mainPath + "/" + newFileName);
-        else newFilePath = Paths.get(newFileName);
+        else newFilePath = Paths.get(mainPath + "/" + newFileName);
         if (!Files.exists(newFilePath))
             Files.createFile(newFilePath);
         else {
@@ -31,5 +31,6 @@ public class FileWriter {
         }
         byte[] outData = writeStr.getBytes();
         Files.write(newFilePath, outData);
+        System.out.println("newFilePath: " + newFilePath);
     }
 }

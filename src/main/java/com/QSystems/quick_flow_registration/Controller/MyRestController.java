@@ -10,6 +10,7 @@ import com.QSystems.quick_flow_registration.entity.LicenceData;
 import com.QSystems.quick_flow_registration.exceptionHandling.NoSuchLicenceException;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -21,6 +22,10 @@ public class MyRestController {
 
     @Autowired
     private LicenceDataService licenceDataService;
+    @Value("${FILE_NAME}")
+    private String FILE_NAME;
+    @Value("${FILE_DIST}")
+    private String FILE_DIST;
 
     @RequestMapping(value = "/licence-info", method = RequestMethod.GET)
     public List<LicenceData> showLicenceInfo() throws Exception {
@@ -34,8 +39,9 @@ public class MyRestController {
 
     @GetMapping("/get-data-for-registration")
     public String getDataForReg() throws IOException {
-        FileWriter.writeFile(OSread.getMatherBoardNumber(), "_QFLicence.txt");
-        return OSread.getMatherBoardNumber();
+        String strForReg = OSread.getMatherBoardNumber();
+        FileWriter.writeFile(strForReg, FILE_DIST, FILE_NAME);
+        return strForReg;
     }
 
     @PostMapping("/add-licence-data")
@@ -57,10 +63,6 @@ public class MyRestController {
         return OSread.getOSName();
     }
 
-    @GetMapping("/test1")
-    public String test1 () {
-        return "test1 !!!!!";
-    }
 
     @SneakyThrows
     @GetMapping("/test-decrypt")

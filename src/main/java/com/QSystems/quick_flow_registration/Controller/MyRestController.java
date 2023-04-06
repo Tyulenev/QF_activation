@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MyRestController {
 
     @Autowired
@@ -74,7 +75,7 @@ public class MyRestController {
     @DeleteMapping("/delete-all")
     public String testDelAll () {
         licenceDataService.deleteLicenceData();
-        return "Delete OK!";
+        return "Licence data deleted. Licences table is Empty!";
     }
 
 }

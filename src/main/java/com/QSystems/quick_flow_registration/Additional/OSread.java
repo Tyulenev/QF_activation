@@ -113,7 +113,7 @@ public class OSread {
     }
 
     public static String getDataForRegistration() {
-        return getMatherBoardNumber() + "\n" + getMac();
+        return getMatherBoardNumber() + getMac();
 //        return getMac();
     }
 }

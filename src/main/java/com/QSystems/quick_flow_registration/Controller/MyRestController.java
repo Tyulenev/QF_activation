@@ -40,7 +40,7 @@ public class MyRestController {
 
     @GetMapping("/get-data-for-registration")
     public String getDataForReg() throws IOException {
-        String strForReg = OSread.getMatherBoardNumber();
+        String strForReg = OSread.getDataForRegistration();
         FileWriter.writeFile(strForReg, FILE_DIST, FILE_NAME);
         return strForReg;
     }

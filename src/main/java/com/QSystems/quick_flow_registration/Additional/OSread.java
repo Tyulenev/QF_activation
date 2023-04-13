@@ -1,8 +1,11 @@
 package com.QSystems.quick_flow_registration.Additional;
 
+import org.unix4j.Unix4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 public class OSread {
     public static String getOSName() {
@@ -68,5 +71,49 @@ public class OSread {
             }
         } else System.out.println("Unknown operating system");
         return result;
+    }
+
+    public static String getMac() {
+        String result = null;
+
+        if (isWindows()) {
+            result = "winMac123";
+        } else if (isLinux()) {
+            String command
+                    = "ip address show";
+//                    = "ip address show | grep ether";
+//                    = "ip address show | grep ether | gawk '{print $2}'";
+            String macAddr = "";
+            try {
+                Process SerialNumberProcess
+                        = Runtime.getRuntime().exec(command);
+                InputStreamReader ISR = new InputStreamReader(
+                        SerialNumberProcess.getInputStream());
+                BufferedReader br = new BufferedReader(ISR);
+//                macAddr = br.readLine().trim();
+                Thread.sleep(100);
+                while (br.ready()) {
+                    String readedLine = br.readLine();
+                    if (readedLine.contains("ether")) {
+                        String[] arrStr = readedLine.split("ether");
+                        macAddr +=  arrStr[1].trim().substring(0,17) + " ";
+                    }
+                }
+                SerialNumberProcess.waitFor();
+                br.close();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+//                macAddr = null;
+                macAddr = "Mac address was not considered";
+            }
+            result = macAddr;
+        }
+        return result;
+    }
+
+    public static String getDataForRegistration() {
+        return getMatherBoardNumber() + "\n" + getMac();
+//        return getMac();
     }
 }

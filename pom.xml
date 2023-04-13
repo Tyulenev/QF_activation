@@ -48,6 +48,12 @@
 <!--            <version>1.9.3</version>-->
 <!--            <type>jar</type>-->
 <!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.unix4j</groupId>
+            <artifactId>unix4j-command</artifactId>
+            <version>0.6</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -50,7 +50,7 @@ public class LicenceDataServiceImpl implements LicenceDataService {
             if (ld.size()!=1)
                 throw new NoSuchLicenceException("\n" +
                         "Licensing table is broken (number of entries != 1). Perform activation again.");
-            if (!OSread.getMatherBoardNumber().equals(dec1.decrypt(encryptedData))) {
+            if (!OSread.getDataForRegistration().equals(dec1.decrypt(encryptedData))) {
                 throw new NoSuchLicenceException("Licences data is incorrect. Please re-enter your licence key.");
             } else return "Licence is OK";
         } catch (Exception e) {
@@ -58,21 +58,4 @@ public class LicenceDataServiceImpl implements LicenceDataService {
         }
     }
 
-    //    @Override
-//    @Transactional
-//    public void saveEmployee(LicenceData emp) {
-//        employeeDAO.saveEmployee(emp);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public LicenceData getEmployee(int id) {
-//        return employeeDAO.getEmployee(id);
-//    }
-//
-//    @Override
-//    @Transactional
-//    public void deleteEmp(int id) {
-//        employeeDAO.deleteEmp(id);
-//    }
 }

@@ -1,11 +1,9 @@
 package com.QSystems.quick_flow_registration.Additional;
 
-import org.unix4j.Unix4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 
 public class OSread {
     public static String getOSName() {
